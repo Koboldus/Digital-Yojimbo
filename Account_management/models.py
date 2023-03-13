@@ -1,3 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from Character_Menagement.models import Character
 
-# Create your models here.
+
+# User-Character one-to-many relation
+#class User(AbstractUser):
+#    Characters = models.ForeignKey()
