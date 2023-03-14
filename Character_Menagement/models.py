@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# This is for traits
 TRAIT_TYPES = (
     ('1', 'Curse'),
     ('2', 'Flaw'),
@@ -34,6 +35,52 @@ class Trait(models):
     )
 
 
+# These are the models for Item Qualities and equipment including armor and weapons
+# price is given in Zeni (1 koku = 5 bu = 50 zeni)
+class ItemQuality(models):
+    name = models.CharField(24)
+    description = models.TextField()
+    opportunities = models.TextField()
+
+
+class Equipment(models):
+    name = models.CharField(max_length=64)
+    rarity = models.IntegerField()
+    price = models.IntegerField()
+    quality1 = models.ManyToManyField(ItemQuality, null=True)
+    quality2 = models.ManyToManyField(ItemQuality, null=True)
+    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    description = models.TextField(null=True)
+
+
+class Weapon(models):
+    name = models.CharField(max_length=64)
+    rarity = models.IntegerField()
+    price = models.IntegerField()
+    quality1 = models.ManyToManyField(ItemQuality, null=True)
+    quality2 = models.ManyToManyField(ItemQuality, null=True)
+    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    description = models.TextField(null=True)
+    skill = models.CharField()
+    range = models.CharField(max_length=3)
+    damage = models.IntegerField()
+    deadliness = models.IntegerField()
+    one_hand = models.CharField(24, null=True)
+    two_hand = models.CharField(24, null=True)
+
+
+class Armor(models):
+    name = models.CharField(max_length=64)
+    rarity = models.IntegerField()
+    price = models.IntegerField()
+    quality1 = models.ManyToManyField(ItemQuality, null=True)
+    quality2 = models.ManyToManyField(ItemQuality, null=True)
+    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    description = models.TextField(null=True)
+    physical_reduction = models.IntegerField(default=0)
+    supernatural_reduction = models.IntegerField(default=0)
+
+
 # This is the Character model
 class Character(models):
     # Clan, Family, name and school
@@ -41,6 +88,7 @@ class Character(models):
     family = models.CharField(max_length=24)
     name = models.CharField(max_length=24)
     school = models.CharField(max_length=64)
+    notes = models.TextField(null=True)
 
     # social atributes, ninjo and giri
     status = models.IntegerField()
@@ -64,9 +112,9 @@ class Character(models):
     smithing = models.IntegerField(default=0)
 
     # Martial Skills
-    fitness= models.IntegerField(default=0)
+    fitness = models.IntegerField(default=0)
     meditation = models.IntegerField(default=0)
-    tactics= models.IntegerField(default=0)
+    tactics = models.IntegerField(default=0)
     melee = models.IntegerField(default=0)
     ranged = models.IntegerField(default=0)
     unarmed = models.IntegerField(default=0)
@@ -98,6 +146,6 @@ class Character(models):
     anxieties = models.ManyToManyField(Trait)
 
     # Equipment
-    weapons = models.ManyToManyField(Weapon)
-    armour = models.ManyToManyField(Armour)
-    equipment = models.ManyToManyField(Equipment)
+    weapons = models.ManyToManyField(Weapon, null=True)
+    armour = models.ManyToManyField(Armor, null=True)
+    equipment = models.ManyToManyField(Equipment, null=True)
