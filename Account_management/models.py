@@ -4,5 +4,5 @@ from Character_Menagement.models import Character
 
 
 # User-Character one-to-many relation
-#class User(AbstractUser):
-#    Characters = models.ForeignKey()
+class L5RUser(AbstractUser):
+    characters = models.ForeignKey(Character, null=True, on_delete=models.SET_NULL)

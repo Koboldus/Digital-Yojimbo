@@ -15,11 +15,22 @@ TRAIT_TYPES = (
 )
 
 
+TRAIT_CATEGORY = (
+    ('1', 'Distinction'),
+    ('2', 'Adversity'),
+    ('3', 'Passion'),
+    ('4', 'Anxiety'),
+)
+
+
 # This is the model for Distinctions, Adversities, Anxieties and Passions
 class Trait(models.Model):
     name = models.CharField(max_length=64)
     ring = models.CharField(max_length=5)
-    category = models.CharField(max_length=16)
+    category = models.CharField(
+        max_length=24,
+        choices=TRAIT_CATEGORY,
+    )
     type1 = models.CharField(
         max_length=24,
         choices=TRAIT_TYPES,
@@ -86,6 +97,22 @@ class Technique(models.Model):
     activation = models.TextField()
     effect = models.TextField()
     opportunities = models.TextField()
+
+
+class SchoolAbility(models.Model):
+    name = models.CharField(max_length=64)
+    description = models.TextField()
+    activation = models.TextField(null=True)
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
+
+
+class MasteryAbility(models.Model):
+    name = models.CharField(max_length=64)
+    description = models.TextField()
+    activation = models.TextField(null=True)
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
 
 
 # This is the Character model
@@ -155,7 +182,9 @@ class Character(models.Model):
     equipment = models.ManyToManyField(Equipment)
 
     # Abilieties
-    school_ability = models.TextField()
-    mastery_ability = models.TextField()
+    school_ability = models.ManyToManyField(SchoolAbility)
+    mastery_ability = models.ManyToManyField(MasteryAbility)
     technique_categories = models.CharField(max_length=64)
     techniques = models.ManyToManyField(Technique)
+
+    date_of_creation = models.DateTimeField(auto_now_add=True)
