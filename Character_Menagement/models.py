@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# This is for traits
+# This is for Traits
 TRAIT_TYPES = (
     ('1', 'Curse'),
     ('2', 'Flaw'),
@@ -16,20 +16,21 @@ TRAIT_TYPES = (
 
 
 # This is the model for Distinctions, Adversities, Anxieties and Passions
-class Trait(models):
+class Trait(models.Model):
     name = models.CharField(max_length=64)
     ring = models.CharField(max_length=5)
+    category = models.CharField(max_length=16)
     type1 = models.CharField(
-        max_length=1,
+        max_length=24,
         choices=TRAIT_TYPES,
     )
     type2 = models.CharField(
-        max_length=1,
+        max_length=24,
         choices=TRAIT_TYPES,
         null=True,
     )
     type3 = models.CharField(
-        max_length=1,
+        max_length=24,
         choices=TRAIT_TYPES,
         null=True,
     )
@@ -37,52 +38,58 @@ class Trait(models):
 
 # These are the models for Item Qualities and equipment including armor and weapons
 # price is given in Zeni (1 koku = 5 bu = 50 zeni)
-class ItemQuality(models):
-    name = models.CharField(24)
+class ItemQuality(models.Model):
+    name = models.CharField(max_length=24)
     description = models.TextField()
     opportunities = models.TextField()
 
 
-class Equipment(models):
+class Equipment(models.Model):
     name = models.CharField(max_length=64)
     rarity = models.IntegerField()
     price = models.IntegerField()
-    quality1 = models.ManyToManyField(ItemQuality, null=True)
-    quality2 = models.ManyToManyField(ItemQuality, null=True)
-    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
 
 
-class Weapon(models):
+class Weapon(models.Model):
     name = models.CharField(max_length=64)
     rarity = models.IntegerField()
     price = models.IntegerField()
-    quality1 = models.ManyToManyField(ItemQuality, null=True)
-    quality2 = models.ManyToManyField(ItemQuality, null=True)
-    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
-    skill = models.CharField()
+    skill = models.CharField(max_length=12)
     range = models.CharField(max_length=3)
     damage = models.IntegerField()
     deadliness = models.IntegerField()
-    one_hand = models.CharField(24, null=True)
-    two_hand = models.CharField(24, null=True)
+    one_hand = models.CharField(max_length=24, null=True)
+    two_hand = models.CharField(max_length=24, null=True)
 
 
-class Armor(models):
+class Armor(models.Model):
     name = models.CharField(max_length=64)
     rarity = models.IntegerField()
     price = models.IntegerField()
-    quality1 = models.ManyToManyField(ItemQuality, null=True)
-    quality2 = models.ManyToManyField(ItemQuality, null=True)
-    quality3 = models.ManyToManyField(ItemQuality, null=True)
+    qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
     physical_reduction = models.IntegerField(default=0)
     supernatural_reduction = models.IntegerField(default=0)
 
 
+# This is the model for techniques
+class Technique(models.Model):
+    name = models.CharField(max_length=64)
+    category = models.CharField(max_length=24)
+    prerequisites = models.CharField(max_length=36)
+    description = models.TextField()
+    xp_cost = models.IntegerField(default=30)
+    activation = models.TextField()
+    effect = models.TextField()
+    opportunities = models.TextField()
+
+
 # This is the Character model
-class Character(models):
+class Character(models.Model):
     # Clan, Family, name and school
     clan = models.CharField(max_length=24)
     family = models.CharField(max_length=24)
@@ -94,8 +101,8 @@ class Character(models):
     status = models.IntegerField()
     glory = models.IntegerField()
     honor = models.IntegerField()
-    ninjo = models.TextField()
-    giri = models.TextField()
+    ninjo = models.CharField(max_length=240)
+    giri = models.CharField(max_length=240)
 
     # Rings
     air = models.IntegerField(default=1)
@@ -140,12 +147,15 @@ class Character(models):
     survival = models.IntegerField(default=0)
 
     # Traits
-    distinctions = models.ManyToManyField(Trait)
-    adversities = models.ManyToManyField(Trait)
-    passions = models.ManyToManyField(Trait)
-    anxieties = models.ManyToManyField(Trait)
+    traits = models.ManyToManyField(Trait)
 
     # Equipment
-    weapons = models.ManyToManyField(Weapon, null=True)
-    armour = models.ManyToManyField(Armor, null=True)
-    equipment = models.ManyToManyField(Equipment, null=True)
+    weapons = models.ManyToManyField(Weapon)
+    armour = models.ManyToManyField(Armor)
+    equipment = models.ManyToManyField(Equipment)
+
+    # Abilieties
+    school_ability = models.TextField()
+    mastery_ability = models.TextField()
+    technique_categories = models.CharField(max_length=64)
+    techniques = models.ManyToManyField(Technique)
