@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="/register/" method="post">
+    {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <br>
+        <input id="first_name" type="text" name="first_name">
+        <br>
+        <br>
+        <label for="last_name">Last Name</label>
+        <br>
+        <input id="last_name" type="text" name="last_name">
+        <br>
+        <br>
+        <label for="mail">Mail</label>
+        <br>
+        <input id="mail" type="email" name="mail">
+        <br>
+        <br>
+        <label for="username">Username</label>
+        <br>
+        <input id="username" type="text" name="username">
+        <br>
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input id="password" type="password" name="password">
+        <br>
+        <br>
+        <label for="password_repeat">Repeat Password</label>
+        <br>
+        <input id="password_repeat" type="password" name="password_repeat">
+        <br>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}

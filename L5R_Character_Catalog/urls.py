@@ -18,9 +18,11 @@ from django.urls import path
 
 from Account_management.views import (
     Main,
+    Register,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Main.as_view()),
+    path('register/', Register.as_view())
 ]

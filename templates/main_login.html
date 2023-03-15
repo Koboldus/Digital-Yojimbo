@@ -3,6 +3,9 @@
 {% block content %}
     <h1>Welcome</h1>
     <h2>Please login</h2>
+    {% if retry == 1 %}
+        <h2>Please input correct credentials!</h2>
+    {% endif %}
     <form action="" method="post">
     {% csrf_token %}
         <label for="username">Username</label>
