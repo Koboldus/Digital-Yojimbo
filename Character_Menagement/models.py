@@ -91,16 +91,21 @@ class Armor(models.Model):
 class Technique(models.Model):
     name = models.CharField(max_length=64)
     category = models.CharField(max_length=24)
+    rings = models.CharField(max_length=24, null=True)
+    action_types = models.CharField(max_length=64, null=True)
+    rank = models.IntegerField()
     prerequisites = models.CharField(max_length=36)
     description = models.TextField()
     xp_cost = models.IntegerField(default=30)
     activation = models.TextField()
-    effect = models.TextField()
-    opportunities = models.TextField()
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
 
 
 class SchoolAbility(models.Model):
     name = models.CharField(max_length=64)
+    rings = models.CharField(max_length=24, null=True)
+    action_types = models.CharField(max_length=64, null=True)
     description = models.TextField()
     activation = models.TextField(null=True)
     effect = models.TextField(null=True)
@@ -109,6 +114,8 @@ class SchoolAbility(models.Model):
 
 class MasteryAbility(models.Model):
     name = models.CharField(max_length=64)
+    rings = models.CharField(max_length=24, null=True)
+    action_types = models.CharField(max_length=64, null=True)
     description = models.TextField()
     activation = models.TextField(null=True)
     effect = models.TextField(null=True)
