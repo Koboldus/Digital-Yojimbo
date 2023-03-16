@@ -60,3 +60,23 @@ class LoggedInView(View):
     def post(self, request):
         logout(request)
         return redirect('/')
+
+
+class AccountDelete(View):
+    def get(self, request, retry=0):
+        if not request.user.is_authenticated:
+            return redirect('/')
+
+        return render(request, 'delete_account.html', {'retry': retry})
+
+    def post(self, request):
+        username = request.POST.get('username')
+        mail = request.POST.get('mail')
+        password = request.POST.get('password')
+        user = authenticate(username=username, email=mail, password=password)
+        if user is not None and username == request.user.username:
+            to_delete = L5RUser.objects.get(username=username)
+            to_delete.delete()
+            return HttpResponse('Account successfully deleted!')
+
+        return HttpResponse('Incorrect account credentials')
