@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
@@ -8,6 +8,8 @@ from Account_management.models import L5RUser
 # Create your views here.
 class Main(View):
     def get(self, request, retry=0):
+        if request.user.is_authenticated:
+            return redirect('/account/')
         return render(request, 'main_login.html', {'retry': retry})
 
     def post(self, request):
@@ -16,7 +18,7 @@ class Main(View):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'main_logged_in.html', {'username': username})
+            return redirect('/account/')
 
         return render(request, 'main_login.html', {'retry': 1})
 
@@ -44,3 +46,17 @@ class Register(View):
         )
 
         return HttpResponse('Created Account')
+
+
+class LoggedInView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/')
+
+        username = request.user.username
+
+        return render(request, 'main_logged_in.html', {'username': username})
+
+    def post(self, request):
+        logout(request)
+        return redirect('/')
