@@ -25,7 +25,7 @@ TRAIT_CATEGORY = (
 
 # This is the model for Distinctions, Adversities, Anxieties and Passions
 class Trait(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     ring = models.CharField(max_length=5)
     category = models.CharField(
         max_length=24,
@@ -50,13 +50,14 @@ class Trait(models.Model):
 # These are the models for Item Qualities and equipment including armor and weapons
 # price is given in Zeni (1 koku = 5 bu = 50 zeni)
 class ItemQuality(models.Model):
-    name = models.CharField(max_length=24)
-    description = models.TextField()
-    opportunities = models.TextField()
+    name = models.CharField(max_length=24, unique=True)
+    description = models.TextField(null=True)
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
 
 
 class Equipment(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     rarity = models.IntegerField()
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
@@ -64,7 +65,7 @@ class Equipment(models.Model):
 
 
 class Weapon(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     rarity = models.IntegerField()
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
@@ -78,7 +79,7 @@ class Weapon(models.Model):
 
 
 class Armor(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     rarity = models.IntegerField()
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
@@ -89,7 +90,7 @@ class Armor(models.Model):
 
 # This is the model for techniques
 class Technique(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     category = models.CharField(max_length=24)
     rings = models.CharField(max_length=24, null=True)
     action_types = models.CharField(max_length=64, null=True)
@@ -98,26 +99,6 @@ class Technique(models.Model):
     description = models.TextField()
     xp_cost = models.IntegerField(default=30)
     activation = models.TextField()
-    effect = models.TextField(null=True)
-    opportunities = models.TextField(null=True)
-
-
-class SchoolAbility(models.Model):
-    name = models.CharField(max_length=64)
-    rings = models.CharField(max_length=24, null=True)
-    action_types = models.CharField(max_length=64, null=True)
-    description = models.TextField()
-    activation = models.TextField(null=True)
-    effect = models.TextField(null=True)
-    opportunities = models.TextField(null=True)
-
-
-class MasteryAbility(models.Model):
-    name = models.CharField(max_length=64)
-    rings = models.CharField(max_length=24, null=True)
-    action_types = models.CharField(max_length=64, null=True)
-    description = models.TextField()
-    activation = models.TextField(null=True)
     effect = models.TextField(null=True)
     opportunities = models.TextField(null=True)
 
@@ -188,10 +169,22 @@ class Character(models.Model):
     armour = models.ManyToManyField(Armor)
     equipment = models.ManyToManyField(Equipment)
 
-    # Abilieties
-    school_ability = models.ManyToManyField(SchoolAbility)
-    mastery_ability = models.ManyToManyField(MasteryAbility)
+    # Abilities
     technique_categories = models.CharField(max_length=64)
     techniques = models.ManyToManyField(Technique)
 
     date_of_creation = models.DateTimeField(auto_now_add=True)
+
+
+# This is the model for school and mastery abilities
+# The 'is_mastery_ability' defines if it's a school (False) or mastery (True) ability
+class SchoolAbility(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    is_mastery_ability = models.BooleanField(default=False)
+    rings = models.CharField(max_length=24, null=True)
+    action_types = models.CharField(max_length=64, null=True)
+    description = models.TextField()
+    activation = models.TextField(null=True)
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
+    characters = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True)
