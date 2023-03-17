@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from Account_management.models import L5RUser
+from Account_management.models import User
+from Character_Menagement.models import Character
 
 
 # Create your views here.
@@ -37,7 +37,7 @@ class Register(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        L5RUser.objects.create_user(
+        User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
             email=mail,
@@ -57,7 +57,9 @@ class LoggedInView(View):
 
         username = request.user.username
 
-        return render(request, 'main_logged_in.html', {'username': username})
+        characters = Character.objects.filter(user_id=request.user.id)
+
+        return render(request, 'main_logged_in.html', {'username': username, 'characters': characters})
 
     def post(self, request):
         logout(request)
@@ -77,7 +79,7 @@ class AccountDelete(View):
         password = request.POST.get('password')
         user = authenticate(username=username, email=mail, password=password)
         if user is not None and username == request.user.username:
-            to_delete = L5RUser.objects.get(username=username)
+            to_delete = User.objects.get(username=username)
             to_delete.delete()
             return redirect(request, '/')
 

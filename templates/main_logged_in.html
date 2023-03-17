@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Welcome {{ username }}</h1>
-
+    <table>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Clan</th>
+                <th>School</th>
+            </tr>
+        {% for character in characters %}
+            <tr>
+                <td><a href="/character/{{ character.id }}/">character sheet</a></td>
+                <td>{{ character.family }} {{ character.name }}</td>
+                <td>{{ character.clan }}</td>
+                <td>{{ character.school }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <form action="/account/" method="post">
     {% csrf_token %}
         <input type="submit" value="logout">
