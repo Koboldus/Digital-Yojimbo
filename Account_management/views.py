@@ -45,7 +45,9 @@ class Register(View):
             password=password,
         )
 
-        return HttpResponse('Created Account')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('/account/')
 
 
 class LoggedInView(View):
@@ -77,6 +79,6 @@ class AccountDelete(View):
         if user is not None and username == request.user.username:
             to_delete = L5RUser.objects.get(username=username)
             to_delete.delete()
-            return HttpResponse('Account successfully deleted!')
+            return redirect(request, '/')
 
-        return HttpResponse('Incorrect account credentials')
+        return render(request, 'delete_account.html', {'retry': 1})
