@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from Character_Menagement.views import (
+    CharacterSheet,
+)
 from Account_management.views import (
     Main,
     Register,
@@ -29,4 +31,5 @@ urlpatterns = [
     path('register/', Register.as_view()),
     path('account/', LoggedInView.as_view()),
     path('account/delete/', AccountDelete.as_view()),
+    path('account/character/<id>/', CharacterSheet.as_view())
 ]
