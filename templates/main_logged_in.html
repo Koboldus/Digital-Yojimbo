@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Welcome {{ username }}</h1>
+    <p><a href="/account/character/create/">Create new character</a></p>
     <table>
             <tr>
                 <th></th>
@@ -10,7 +11,7 @@
             </tr>
         {% for character in characters %}
             <tr>
-                <td><a href="/character/{{ character.id }}/">character sheet</a></td>
+                <td><a href="/account/character/{{ character.id }}/">character sheet</a></td>
                 <td>{{ character.family }} {{ character.name }}</td>
                 <td>{{ character.clan }}</td>
                 <td>{{ character.school }}</td>

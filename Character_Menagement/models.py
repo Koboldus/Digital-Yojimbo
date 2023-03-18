@@ -1,5 +1,6 @@
 from django.db import models
 
+from Account_management.models import User
 
 # This is for Traits
 TRAIT_TYPES = (
@@ -103,6 +104,19 @@ class Technique(models.Model):
     opportunities = models.TextField(null=True)
 
 
+# This is the model for school and mastery abilities
+# The 'is_mastery_ability' defines if it's a school (False) or mastery (True) ability
+class SchoolAbility(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    is_mastery_ability = models.BooleanField(default=False)
+    rings = models.CharField(max_length=24, null=True)
+    action_types = models.CharField(max_length=64, null=True)
+    description = models.TextField(null=True)
+    activation = models.TextField(null=True)
+    effect = models.TextField(null=True)
+    opportunities = models.TextField(null=True)
+
+
 # This is the Character model
 class Character(models.Model):
     # Clan, Family, name and school
@@ -172,19 +186,8 @@ class Character(models.Model):
     # Abilities
     technique_categories = models.CharField(max_length=64)
     techniques = models.ManyToManyField(Technique)
+    school_ability = models.ManyToManyField(SchoolAbility)
 
+    # Meta information
     date_of_creation = models.DateTimeField(auto_now_add=True)
-
-
-# This is the model for school and mastery abilities
-# The 'is_mastery_ability' defines if it's a school (False) or mastery (True) ability
-class SchoolAbility(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    is_mastery_ability = models.BooleanField(default=False)
-    rings = models.CharField(max_length=24, null=True)
-    action_types = models.CharField(max_length=64, null=True)
-    description = models.TextField()
-    activation = models.TextField(null=True)
-    effect = models.TextField(null=True)
-    opportunities = models.TextField(null=True)
-    characters = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
