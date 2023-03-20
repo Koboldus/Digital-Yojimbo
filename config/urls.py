@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from Character_Menagement.views import (
     CharacterSheet,
+    CharacterEditing,
 )
 from Account_management.views import (
     Main,
@@ -29,7 +30,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Main.as_view()),
     path('register/', Register.as_view()),
-    path('account/', LoggedInView.as_view()),
+    path('account/', LoggedInView.as_view(), name='main'),
     path('account/delete/', AccountDelete.as_view()),
-    path('account/character/<id>/', CharacterSheet.as_view())
+    path('account/character/<id>/', CharacterSheet.as_view()),
+    path('account/character/<id>/edit/', CharacterEditing.as_view()),
 ]

@@ -126,7 +126,7 @@ class Character(models.Model):
     school = models.CharField(max_length=64)
     notes = models.TextField(null=True)
 
-    # social atributes, ninjo and giri
+    # social attributes, ninjo and giri
     status = models.IntegerField()
     glory = models.IntegerField()
     honor = models.IntegerField()
