@@ -135,3 +135,24 @@ class CharacterCreation(View):
         )
 
         return redirect('/account/')
+
+
+class CharacterDelete(View):
+    def get(self, request, id):
+        character = Character.objects.get(id=id)
+        if request.user.id != character.user_id:
+            return HttpResponse("This isn't one of your characters")
+
+        return render(request, 'character_delete.html', {'character': character})
+
+    def post(self, request, id):
+        character = Character.objects.get(id=id)
+        if request.user.id != character.user_id:
+            return HttpResponse("This isn't one of your characters")
+
+        if 'no' in request.POST:
+            return redirect(f'/account/character/{character.id}/')
+
+        character.delete()
+
+        return redirect('/account/')

@@ -19,6 +19,7 @@ from Character_Menagement.views import (
     CharacterSheet,
     CharacterEditing,
     CharacterCreation,
+    CharacterDelete,
 )
 from Account_management.views import (
     Main,
@@ -36,4 +37,5 @@ urlpatterns = [
     path('account/character/create/', CharacterCreation.as_view()),
     path('account/character/<id>/', CharacterSheet.as_view()),
     path('account/character/<id>/edit/', CharacterEditing.as_view()),
+    path('account/character/<id>/delete/', CharacterDelete.as_view()),
 ]
