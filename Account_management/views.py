@@ -81,6 +81,6 @@ class AccountDelete(View):
         if user is not None and username == request.user.username:
             to_delete = User.objects.get(username=username)
             to_delete.delete()
-            return redirect(request, '/')
+            return redirect('/')
 
         return render(request, 'delete_account.html', {'retry': 1})
