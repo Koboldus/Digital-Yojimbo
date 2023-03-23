@@ -2,49 +2,20 @@ from django.db import models
 
 from Account_management.models import User
 
-# This is for Traits
-TRAIT_TYPES = (
-    ('1', 'Curse'),
-    ('2', 'Flaw'),
-    ('3', 'Interpersonal'),
-    ('4', 'Infamy'),
-    ('5', 'Mental'),
-    ('6', 'Physical'),
-    ('7', 'Scar'),
-    ('8', 'Spiritual'),
-    ('9', 'Virtue'),
-)
-
-
-TRAIT_CATEGORY = (
-    ('1', 'Distinction'),
-    ('2', 'Adversity'),
-    ('3', 'Passion'),
-    ('4', 'Anxiety'),
-)
-
 
 # This is the model for Distinctions, Adversities, Anxieties and Passions
 class Trait(models.Model):
     name = models.CharField(max_length=64, unique=True)
     ring = models.CharField(max_length=5)
-    category = models.CharField(
-        max_length=24,
-        choices=TRAIT_CATEGORY,
-    )
-    type1 = models.CharField(
-        max_length=24,
-        choices=TRAIT_TYPES,
-    )
+    category = models.CharField(max_length=24)
+    type1 = models.CharField(max_length=24)
     type2 = models.CharField(
         max_length=24,
-        choices=TRAIT_TYPES,
-        null=True,
+        null=True
     )
     type3 = models.CharField(
         max_length=24,
-        choices=TRAIT_TYPES,
-        null=True,
+        null=True
     )
 
 
@@ -176,17 +147,17 @@ class Character(models.Model):
     survival = models.IntegerField(default=0)
 
     # Traits
-    traits = models.ManyToManyField(Trait)
+    traits = models.ManyToManyField(Trait, related_name='trait')
 
     # Equipment
-    weapons = models.ManyToManyField(Weapon)
-    armour = models.ManyToManyField(Armor)
-    equipment = models.ManyToManyField(Equipment)
+    weapons = models.ManyToManyField(Weapon, related_name='weapon')
+    armor = models.ManyToManyField(Armor, related_name='defense')
+    equipment = models.ManyToManyField(Equipment, related_name='eq')
 
     # Abilities
     technique_categories = models.CharField(max_length=64)
-    techniques = models.ManyToManyField(Technique)
-    school_ability = models.ManyToManyField(SchoolAbility)
+    techniques = models.ManyToManyField(Technique, related_name='techs')
+    school_ability = models.ManyToManyField(SchoolAbility, related_name='school_abi')
 
     # Meta information
     date_of_creation = models.DateTimeField(auto_now_add=True)

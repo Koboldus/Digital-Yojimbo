@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from Character_Menagement.models import Character
+from Character_Menagement.models import Character, Trait
 
 
 # The character sheet view
@@ -13,6 +13,14 @@ class CharacterSheet(View):
         character = Character.objects.get(id=id)
         if request.user.id != character.user_id:
             return HttpResponse("This isn't one of your characters")
+
+        distinctions = []
+        adversities = []
+        passions = []
+        anxieties = []
+
+        #for trait in character.traits.all:
+        #    if trait.category ==
 
         return render(request, 'character_sheet.html', {'character': character})
 
