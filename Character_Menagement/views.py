@@ -14,14 +14,6 @@ class CharacterSheet(View):
         if request.user.id != character.user_id:
             return HttpResponse("This isn't one of your characters")
 
-        distinctions = []
-        adversities = []
-        passions = []
-        anxieties = []
-
-        #for trait in character.traits.all:
-        #    if trait.category ==
-
         return render(request, 'character_sheet.html', {'character': character})
 
 
@@ -85,6 +77,13 @@ class CharacterEditing(View):
         character.survival = request.POST.get('survival')
         character.honor = request.POST.get('honor')
 
+        character.traits.clear()
+
+        traits = request.POST.getlist('traits')
+        for element in traits:
+            a = Trait.objects.get(name=element)
+            character.traits.add(a)
+
         character.save()
 
         return redirect(f'/account/character/{id}/')
@@ -95,10 +94,12 @@ class CharacterCreation(View):
         if not request.user.is_authenticated:
             return redirect('/')
 
-        return render(request, 'character_create.html')
+        traits = Trait.objects.all()
+
+        return render(request, 'character_create.html', {'traits': traits})
 
     def post(self, request):
-        Character.objects.create(
+        character = Character.objects.create(
             clan=request.POST.get('clan'),
             family=request.POST.get('family'),
             name=request.POST.get('name'),
@@ -139,8 +140,13 @@ class CharacterCreation(View):
             skullduggery=request.POST.get('skullduggery'),
             survival=request.POST.get('survival'),
             technique_categories=request.POST.get('techniques'),
-            user=request.user
+            user=request.user,
         )
+
+        traits = request.POST.getlist('traits')
+        for element in traits:
+            a = Trait.objects.get(name=element)
+            character.traits.add(a)
 
         return redirect('/account/')
 

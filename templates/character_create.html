@@ -246,6 +246,50 @@
         <p>
             <input id="status" type="number" name="status" value="50" max="100" min="0">
         </p>
+    <h2>Distinctions</h2>
+        <p>
+            <input type="text" list="distinct" name="traits" id="distinctions">
+            <datalist id="distinct">
+                {% for trait in traits %}
+                    {% if trait.category == 'Distinction' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Adversities</h2>
+        <p>
+            <input type="text" list="advers" name="traits" id="adversities">
+            <datalist id="advers">
+                {% for trait in traits %}
+                    {% if trait.category == 'Adversity' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Passions</h2>
+        <p>
+            <input type="text" list="pass" name="traits" id="passions">
+            <datalist id="pass">
+                {% for trait in traits %}
+                    {% if trait.category == 'Passion' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Anxieties</h2>
+        <p>
+            <input type="text" list="anxious" name="traits" id="anxieties">
+            <datalist id="anxious">
+                {% for trait in traits %}
+                    {% if trait.category == 'Anxiety' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
         <p>
             <input type="submit" value="save">
         </p>
