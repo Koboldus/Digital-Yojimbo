@@ -242,7 +242,7 @@
         </p>
     <h2>Distinctions</h2>
         <p>
-            <input type="text" list="distinct" name="traits" id="distinctions" value="
+            <input type="text" required="required" list="distinct" name="traits" id="distinctions" value="
 {% for trait in character.traits.all %}
 {% if trait.category == 'Distinction' %}
 {{ trait.name }}
@@ -259,7 +259,7 @@
         </p>
     <h2>Adversities</h2>
         <p>
-            <input type="text" list="advers" name="traits" id="adversities" value="
+            <input type="text" required="required" list="advers" name="traits" id="adversities" value="
 {% for trait in character.traits.all %}
 {% if trait.category == 'Adversity' %}
 {{ trait.name }}
@@ -276,7 +276,7 @@
         </p>
     <h2>Passions</h2>
         <p>
-            <input type="text" list="pass" name="traits" id="passions" value="
+            <input type="text" required="required" list="pass" name="traits" id="passions" value="
 {% for trait in character.traits.all %}
 {% if trait.category == 'Passion' %}
 {{ trait.name }}
@@ -293,7 +293,7 @@
         </p>
     <h2>Anxieties</h2>
         <p>
-            <input type="text" list="anxious" name="traits" id="anxieties" value="
+            <input type="text" required="required" list="anxious" name="traits" id="anxieties" value="
 {% for trait in character.traits.all %}
 {% if trait.category == 'Anxiety' %}
 {{ trait.name }}
