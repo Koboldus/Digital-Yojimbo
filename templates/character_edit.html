@@ -1,0 +1,315 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/account/character/{{ character.id }}/edit/" method="post" id="{{ character.id }}">
+{% csrf_token %}
+    <h2>General information</h2>
+        <p>
+            <label for="clan">Clan</label>
+        </p>
+        <p>
+            <input id="clan" type="text" name="clan" value="{{ character.clan }}">
+        </p>
+        <p>
+            <label for="family">Family</label>
+        </p>
+        <p>
+            <input id="family" type="text" name="family" value="{{ character.family }}">
+        </p>
+        <p>
+            <label for="name">Name</label>
+        </p>
+        <p>
+            <input id="name" type="text" name="name" value="{{ character.name }}">
+        </p>
+        <p>
+            <label for="school">School</label>
+        </p>
+        <p>
+            <input id="school" type="text" name="school" value="{{ character.school }}">
+        </p>
+        <p>
+            <label for="ninjo">Ninjo</label>
+        </p>
+        <p>
+            <input id="ninjo" type="text" name="ninjo" value="{{ character.ninjo }}">
+        </p>
+        <p>
+            <label for="giri">Giri</label>
+        </p>
+        <p>
+            <input id="giri" type="text" name="giri" value="{{ character.giri }}">
+        </p>
+        <p>
+            <label for="notes">Notes</label>
+        </p>
+        <p>
+            <input id="notes" type="text" name="notes" value="{{ character.notes }}">
+        </p>
+    <h2>Rings</h2>
+        <p>
+            <label for="air">Air</label>
+        </p>
+        <p>
+            <input id="air" type="number" name="air" value="{{ character.air }}" max="5" min="1">
+        </p>
+        <p>
+            <label for="earth">Earth</label>
+        </p>
+        <p>
+            <input id="earth" type="number" name="earth" value="{{ character.earth }}" max="5" min="1">
+        </p>
+        <p>
+            <label for="fire">Fire</label>
+        </p>
+        <p>
+            <input id="fire" type="number" name="fire" value="{{ character.water }}" max="5" min="1">
+        </p>
+        <p>
+            <label for="water">Water</label>
+        </p>
+        <p>
+            <input id="water" type="number" name="water" value="{{ character.fire }}" max="5" min="1">
+        </p>
+        <p>
+            <label for="void">Void</label>
+        </p>
+        <p>
+            <input id="void" type="number" name="void" value="{{ character.void }}" max="5" min="1">
+        </p>
+    <h2>Skills</h2>
+        <p>
+            <label for="aesthetics">Aesthetics</label>
+        </p>
+        <p>
+            <input id="aesthetics" type="number" name="aesthetics" value="{{ character.aesthetics }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="composition">Composition</label>
+        </p>
+        <p>
+            <input id="composition" type="number" name="composition" value="{{ character.composition }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="design">Design</label>
+        </p>
+        <p>
+            <input id="design" type="number" name="design" value="{{ character.design }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="smithing">Smithing</label>
+        </p>
+        <p>
+            <input id="smithing" type="number" name="smithing" value="{{ character.smithing }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="fitness">Fitness</label>
+        </p>
+        <p>
+            <input id="fitness" type="number" name="fitness" value="{{ character.fitness }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="meditation">Meditation</label>
+        </p>
+        <p>
+            <input id="meditation" type="number" name="meditation" value="{{ character.meditation }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="tactics">Tactics</label>
+        </p>
+        <p>
+            <input id="tactics" type="number" name="tactics" value="{{ character.tactics }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="melee">Martial Arts Melee</label>
+        </p>
+        <p>
+            <input id="melee" type="number" name="melee" value="{{ character.melee }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="ranged">Martial Arts Ranged</label>
+        </p>
+        <p>
+            <input id="ranged" type="number" name="ranged" value="{{ character.ranged }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="unarmed">Martial Arts Unarmed</label>
+        </p>
+        <p>
+            <input id="unarmed" type="number" name="unarmed" value="{{ character.unarmed }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="command">Command</label>
+        </p>
+        <p>
+            <input id="command" type="number" name="command" value="{{ character.command }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="courtesy">Courtesy</label>
+        </p>
+        <p>
+            <input id="courtesy" type="number" name="courtesy" value="{{ character.courtesy }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="games">Games</label>
+        </p>
+        <p>
+            <input id="games" type="number" name="games" value="{{ character.games }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="performance">Performance</label>
+        </p>
+        <p>
+            <input id="performance" type="number" name="performance" value="{{ character.performance }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="culture">Culture</label>
+        </p>
+        <p>
+            <input id="culture" type="number" name="culture" value="{{ character.culture }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="government">Government</label>
+        </p>
+        <p>
+            <input id="government" type="number" name="government" value="{{ character.government }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="sentiment">Sentiment</label>
+        </p>
+        <p>
+            <input id="sentiment" type="number" name="sentiment" value="{{ character.sentiment }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="theology">Theology</label>
+        </p>
+        <p>
+            <input id="theology" type="number" name="theology" value="{{ character.theology }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="medicine">Medicine</label>
+        </p>
+        <p>
+            <input id="medicine" type="number" name="medicine" value="{{ character.medicine }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="commerce">Commerce</label>
+        </p>
+        <p>
+            <input id="commerce" type="number" name="commerce" value="{{ character.commerce }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="labour">Labour</label>
+        </p>
+        <p>
+            <input id="labour" type="number" name="labour" value="{{ character.labour }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="seafaring">Seafaring</label>
+        </p>
+        <p>
+            <input id="seafaring" type="number" name="seafaring" value="{{ character.seafaring }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="skullduggery">Skullduggery</label>
+        </p>
+        <p>
+            <input id="skullduggery" type="number" name="skullduggery" value="{{ character.skullduggery }}" max="5" min="0">
+        </p>
+        <p>
+            <label for="survival">Survival</label>
+        </p>
+        <p>
+            <input id="survival" type="number" name="survival" value="{{ character.survival }}" max="5" min="0">
+        </p>
+    <h2>Social Attributes</h2>
+        <p>
+            <label for="honor">Honor</label>
+        </p>
+        <p>
+            <input id="honor" type="number" name="honor" value="{{ character.honor }}" max="100" min="0">
+        </p>
+        <p>
+            <label for="glory">Glory</label>
+        </p>
+        <p>
+            <input id="glory" type="number" name="glory" value="{{ character.glory }}" max="100" min="0">
+        </p>
+        <p>
+            <label for="status">Status</label>
+        </p>
+        <p>
+            <input id="status" type="number" name="status" value="{{ character.status }}" max="100" min="0">
+        </p>
+    <h2>Distinctions</h2>
+        <p>
+            <input type="text" required="required" list="distinct" name="traits" id="distinctions" value="
+{% for trait in character.traits.all %}
+{% if trait.category == 'Distinction' %}
+{{ trait.name }}
+{% endif %}
+{% endfor %}
+">
+            <datalist id="distinct">
+                {% for trait in traits %}
+                    {% if trait.category == 'Distinction' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Adversities</h2>
+        <p>
+            <input type="text" required="required" list="advers" name="traits" id="adversities" value="
+{% for trait in character.traits.all %}
+{% if trait.category == 'Adversity' %}
+{{ trait.name }}
+{% endif %}
+{% endfor %}
+">
+            <datalist id="advers">
+                {% for trait in traits %}
+                    {% if trait.category == 'Adversity' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Passions</h2>
+        <p>
+            <input type="text" required="required" list="pass" name="traits" id="passions" value="
+{% for trait in character.traits.all %}
+{% if trait.category == 'Passion' %}
+{{ trait.name }}
+{% endif %}
+{% endfor %}
+">
+            <datalist id="pass">
+                {% for trait in traits %}
+                    {% if trait.category == 'Passion' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+    <h2>Anxieties</h2>
+        <p>
+            <input type="text" required="required" list="anxious" name="traits" id="anxieties" value="
+{% for trait in character.traits.all %}
+{% if trait.category == 'Anxiety' %}
+{{ trait.name }}
+{% endif %}
+{% endfor %}
+">
+            <datalist id="anxious">
+                {% for trait in traits %}
+                    {% if trait.category == 'Anxiety' %}
+                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
+                    {% endif %}
+                {% endfor %}
+            </datalist>
+        </p>
+        <p>
+            <input type="submit" value="save">
+        </p>
+</form>
+{% endblock %}

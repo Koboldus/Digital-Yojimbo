@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>Skills</th>
+            </tr>
+            <tr>
+                <td>Aesthetics</td>
+                <td>{{ character.aesthetics }}</td>
+            </tr>
+            <tr>
+                <td>Composition</td>
+                <td>{{ character.composition }}</td>
+            </tr>
+            <tr>
+                <td>Design</td>
+                <td>{{ character.design }}</td>
+            </tr>
+            <tr>
+                <td>Smithing</td>
+                <td>{{ character.smithing }}</td>
+            </tr>
+            <tr>
+                <td>Fitness</td>
+                <td>{{ character.fitness }}</td>
+            </tr>
+            <tr>
+                <td>Meditation</td>
+                <td>{{ character.meditation }}</td>
+            </tr>
+            <tr>
+                <td>Tactics</td>
+                <td>{{ character.tactics }}</td>
+            </tr>
+            <tr>
+                <td>Martial Arts Melee</td>
+                <td>{{ character.melee }}</td>
+            </tr>
+            <tr>
+                <td>Martial Arts Ranged</td>
+                <td>{{ character.ranged }}</td>
+            </tr>
+            <tr>
+                <td>Martial Arts Unarmed</td>
+                <td>{{ character.unarmed }}</td>
+            </tr>
+            <tr>
+                <td>Command</td>
+                <td>{{ character.command }}</td>
+            </tr>
+            <tr>
+                <td>Courtesy</td>
+                <td>{{ character.courtesy }}</td>
+            </tr>
+            <tr>
+                <td>Games</td>
+                <td>{{ character.games }}</td>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>{{ character.performance }}</td>
+            </tr>
+            <tr>
+                <td>Culture</td>
+                <td>{{ character.culture }}</td>
+            </tr>
+            <tr>
+                <td>Government</td>
+                <td>{{ character.government }}</td>
+            </tr>
+            <tr>
+                <td>Sentiment</td>
+                <td>{{ character.sentiment }}</td>
+            </tr>
+            <tr>
+                <td>Theology</td>
+                <td>{{ character.theology }}</td>
+            </tr>
+            <tr>
+                <td>Medicine</td>
+                <td>{{ character.medicine }}</td>
+            </tr>
+            <tr>
+                <td>Commerce</td>
+                <td>{{ character.commerce }}</td>
+            </tr>
+            <tr>
+                <td>Labour</td>
+                <td>{{ character.labour }}</td>
+            </tr>
+            <tr>
+                <td>Seafaring</td>
+                <td>{{ character.seafaring }}</td>
+            </tr>
+            <tr>
+                <td>Skullduggery</td>
+                <td>{{ character.skullduggery }}</td>
+            </tr>
+            <tr>
+                <td>Survival</td>
+                <td>{{ character.survival }}</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div>
+            <div>Earth {{ character.earth }}</div>
+            <div>Air {{ character.air }}</div>
+            <div>Water {{ character.water }}</div>
+            <div>Fire {{ character.fire }}</div>
+            <div>Void {{ character.void }}</div>
+        </div>
+        <div>
+            <div>Honor: {{ character.honor }}</div>
+            <div>Glory: {{ character.glory }}</div>
+            <div>Status: {{ character.status }}</div>
+        </div>
+        <div>
+            <h3>Ninjo</h3>
+            <p>{{ character.ninjo }}</p>
+        </div>
+        <div>
+            <h3>Giri</h3>
+            <p>{{ character.giri }}</p>
+        </div>
+        <div>
+            <h3>Distinctions</h3>
+            {% for element in character.traits.all %}
+                {% if element.category == 'Distinction' %}
+            <p>{{ element.name }} ({{ element.ring }})</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Adversities</h3>
+            {% for element in character.traits.all %}
+                {% if element.category == 'Adversity' %}
+            <p>{{ element.name }} ({{ element.ring }})</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Passions</h3>
+            {% for element in character.traits.all %}
+                {% if element.category == 'Passion' %}
+            <p>{{ element.name }} ({{ element.ring }})</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Anxieties</h3>
+            {% for element in character.traits.all %}
+                {% if element.category == 'Anxiety' %}
+            <p>{{ element.name }} ({{ element.ring }})</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div><a href="/account/">Return</a></div>
+<div><a href="/account/character/{{ character.id }}/edit/">Edit</a></div>
+<div><a href="/account/character/{{ character.id }}/delete/">Delete</a></div>
+{% endblock %}

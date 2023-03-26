@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if retry == 1 %}
+        <h2>Please input correct credentials!</h2>
+    {% endif %}
+    <form action="/account/delete/" method="post">
+    {% csrf_token %}
+        <label for="username">Username</label>
+        <br>
+        <input id="username" type="text" name="username">
+        <br>
+        <br>
+        <label for="mail">Mail</label>
+        <br>
+        <input id="mail" type="email" name="mail">
+        <br>
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input id="password" type="password" name="password">
+        <br>
+        <br>
+        <input type="submit" value="delete account">
+    </form>
+{% endblock %}
