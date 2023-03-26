@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/account/character/{{ character.id }}/delete/" method="post">
+{%  csrf_token %}
+<h1>ARE YOU SURE YOU WANT TO DELETE THIS CHARACTER?</h1>
+<H2>--{{ character.family }} {{ character.name }}--</H2>
+    <p></p>
+    <p><input type="submit" name="yes" value="Yes. Delete this character"></p>
+    <p><input type="submit" name="no" value="No. Take me back"></p>
+</form>
+{% endblock %}
