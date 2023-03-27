@@ -77,11 +77,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'HOST': '127.0.0.1',
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'postgres',
-        'PASSWORD': 'coderslab',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'HOST': '0.0.0.0:80',
+        'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+        'NGINX_VERSION': '1.23.3',
+        'PKG_RELEASE': '1',
+        'NJS_VERSION': '0.7.9',
+        'NAME': 'mydatabase',
     }
 }
 
