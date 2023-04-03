@@ -126,6 +126,10 @@
             <p>{{ character.giri }}</p>
         </div>
         <div>
+            <h3>Available Techniques</h3>
+            <p>{{ character.technique_categories }}</p>
+        </div>
+        <div>
             <h3>Distinctions</h3>
             {% for element in character.traits.all %}
                 {% if element.category == 'Distinction' %}
