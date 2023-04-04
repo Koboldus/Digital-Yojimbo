@@ -139,7 +139,7 @@ class CharacterCreation(View):
             seafaring=request.POST.get('seafaring'),
             skullduggery=request.POST.get('skullduggery'),
             survival=request.POST.get('survival'),
-            technique_categories=request.POST.get('techniques'),
+            technique_categories='blank',
             user=request.user,
         )
 
@@ -147,6 +147,11 @@ class CharacterCreation(View):
         for element in traits:
             a = Trait.objects.get(name=element)
             character.traits.add(a)
+
+        technique_categories = request.POST.getlist('technique_categories')
+        technique_categories_joined = ', '.join(technique_categories)
+        character.technique_categories=technique_categories_joined
+        character.save()
 
         return redirect('/account/')
 

@@ -18,6 +18,9 @@ class Trait(models.Model):
         null=True
     )
 
+    def __str__(self):
+        return self.name
+
 
 # These are the models for Item Qualities and equipment including armor and weapons
 # price is given in Zeni (1 koku = 5 bu = 50 zeni)
@@ -27,6 +30,9 @@ class ItemQuality(models.Model):
     effect = models.TextField(null=True)
     opportunities = models.TextField(null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Equipment(models.Model):
     name = models.CharField(max_length=64, unique=True)
@@ -34,6 +40,9 @@ class Equipment(models.Model):
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Weapon(models.Model):
@@ -49,6 +58,9 @@ class Weapon(models.Model):
     one_hand = models.CharField(max_length=24, null=True)
     two_hand = models.CharField(max_length=24, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Armor(models.Model):
     name = models.CharField(max_length=64, unique=True)
@@ -58,6 +70,9 @@ class Armor(models.Model):
     description = models.TextField(null=True)
     physical_reduction = models.IntegerField(default=0)
     supernatural_reduction = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
 
 
 # This is the model for techniques
@@ -74,6 +89,9 @@ class Technique(models.Model):
     effect = models.TextField(null=True)
     opportunities = models.TextField(null=True)
 
+    def __str__(self):
+        return self.name
+
 
 # This is the model for school and mastery abilities
 # The 'is_mastery_ability' defines if it's a school (False) or mastery (True) ability
@@ -86,6 +104,9 @@ class SchoolAbility(models.Model):
     activation = models.TextField(null=True)
     effect = models.TextField(null=True)
     opportunities = models.TextField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
 # This is the Character model
