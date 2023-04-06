@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
+<div class="main-container">
     <div>
         <table>
             <tr>
-                <th>Skills</th>
+                <th colspan="3">Skills</th>
             </tr>
             <tr>
+                <th rowspan="4" class="skill-group">Artisan</th>
                 <td>Aesthetics</td>
                 <td>{{ character.aesthetics }}</td>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ character.smithing }}</td>
             </tr>
             <tr>
+                <th rowspan="6" class="skill-group">Martial</th>
                 <td>Fitness</td>
                 <td>{{ character.fitness }}</td>
             </tr>
@@ -47,6 +49,7 @@
                 <td>{{ character.unarmed }}</td>
             </tr>
             <tr>
+                <th rowspan="4" class="skill-group">Social</th>
                 <td>Command</td>
                 <td>{{ character.command }}</td>
             </tr>
@@ -63,6 +66,7 @@
                 <td>{{ character.performance }}</td>
             </tr>
             <tr>
+                <th rowspan="5" class="skill-group">Scholar</th>
                 <td>Culture</td>
                 <td>{{ character.culture }}</td>
             </tr>
@@ -83,6 +87,7 @@
                 <td>{{ character.medicine }}</td>
             </tr>
             <tr>
+                <th rowspan="5" class="skill-group">Trade</th>
                 <td>Commerce</td>
                 <td>{{ character.commerce }}</td>
             </tr>
@@ -106,16 +111,47 @@
     </div>
     <div>
         <div>
-            <div>Earth {{ character.earth }}</div>
-            <div>Air {{ character.air }}</div>
-            <div>Water {{ character.water }}</div>
-            <div>Fire {{ character.fire }}</div>
-            <div>Void {{ character.void }}</div>
+            <table>
+                <tr>
+                    <th colspan="2">Rings</th>
+                </tr>
+                <tr>
+                    <td>Earth</td>
+                    <td>{{ character.earth }}</td>
+                </tr>
+                <tr>
+                    <td>Air</td>
+                    <td>{{ character.air }}</td>
+                </tr>
+                <tr>
+                    <td>Water</td>
+                    <td>{{ character.water }}</td>
+                </tr>
+                <tr>
+                    <td>Fire</td>
+                    <td>{{ character.fire }}</td>
+                </tr>
+                <tr>
+                    <td>Void</td>
+                    <td>{{ character.void }}</td>
+                </tr>
+            </table>
         </div>
         <div>
-            <div>Honor: {{ character.honor }}</div>
-            <div>Glory: {{ character.glory }}</div>
-            <div>Status: {{ character.status }}</div>
+            <table>
+                <tr>
+                    <td>Honor</td>
+                    <td>{{ character.honor }}</td>
+                </tr>
+                <tr>
+                    <td>Glory</td>
+                    <td>{{ character.glory }}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{ character.status }}</td>
+                </tr>
+            </table>
         </div>
         <div>
             <h3>Ninjo</h3>

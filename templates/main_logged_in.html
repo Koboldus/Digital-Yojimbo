@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <h1>Welcome {{ username }}</h1>
     <p><a href="/account/character/create/">Create new character</a></p>
     <table>
             <tr>
-                <th></th>
                 <th>Name</th>
                 <th>Clan</th>
                 <th>School</th>
             </tr>
         {% for character in characters %}
             <tr>
-                <td><a href="/account/character/{{ character.id }}/">more</a></td>
-                <td>{{ character.family }} {{ character.name }}</td>
+                <td><a href="/account/character/{{ character.id }}/">{{ character.family }} {{ character.name }}</a></td>
                 <td>{{ character.clan }}</td>
                 <td>{{ character.school }}</td>
             </tr>
