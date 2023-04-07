@@ -39,34 +39,40 @@
         <p>
             Available Techniques
         </p>
-        <p>
-            <input type="checkbox" id="Kata" name="technique_categories" value="Kata">
-            <label for="Kata">Kata</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Kihō" name="technique_categories" value="Kihō">
-            <label for="Kihō">Kihō</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Invocations" name="technique_categories" value="Invocations">
-            <label for="Invocations">Invocations</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Rituals" name="technique_categories" value="Rituals">
-            <label for="Rituals">Rituals</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Shūji" name="technique_categories" value="Shūji">
-            <label for="Shūji">Shūji</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Mahō" name="technique_categories" value="Mahō">
-            <label for="Mahō">Mahō</label>
-        </p>
-        <p>
-            <input type="checkbox" id="Ninjutsu" name="technique_categories" value="Ninjutsu">
-            <label for="Ninjutsu">Ninjutsu</label>
-        </p>
+        <div class="main-container">
+            <div>
+                <p>
+                    <input type="checkbox" id="Kata" name="technique_categories" value="Kata">
+                    <label for="Kata">Kata</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Kihō" name="technique_categories" value="Kihō">
+                    <label for="Kihō">Kihō</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Invocations" name="technique_categories" value="Invocations">
+                    <label for="Invocations">Invocations</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Rituals" name="technique_categories" value="Rituals">
+                    <label for="Rituals">Rituals</label>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <input type="checkbox" id="Shūji" name="technique_categories" value="Shūji">
+                    <label for="Shūji">Shūji</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Mahō" name="technique_categories" value="Mahō">
+                    <label for="Mahō">Mahō</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Ninjutsu" name="technique_categories" value="Ninjutsu">
+                    <label for="Ninjutsu">Ninjutsu</label>
+                </p>
+            </div>
+        </div>
         <p>
             <label for="ninjo">Ninjo</label>
         </p>
@@ -83,7 +89,7 @@
             <label for="notes">Notes</label>
         </p>
         <p>
-            <input id="notes" type="text" name="notes">
+            <textarea id="notes" type="text" name="notes" rows="10" cols="50"></textarea>
         </p>
     <h2>Rings</h2>
         <p>
@@ -281,7 +287,7 @@
             <input id="status" type="number" name="status" value="50" max="100" min="0">
         </p>
     <h2>Distinctions</h2> 
-        <div>
+        <div class="traits">
                 {% for trait in traits %}
                     {% if trait.category == 'Distinction' %}
                     <p>
@@ -292,7 +298,7 @@
                 {% endfor %}
         </div>
     <h2>Adversities</h2>
-        <div>
+        <div class="traits">
             {% for trait in traits %}
                 {% if trait.category == 'Adversity' %}
                 <p>
@@ -303,7 +309,7 @@
             {% endfor %}
         </div>
     <h2>Passions</h2>
-        <div>
+        <div class="traits">
             {% for trait in traits %}
                 {% if trait.category == 'Passion' %}
                 <p>
@@ -314,7 +320,7 @@
             {% endfor %}
         </div>
     <h2>Anxieties</h2>
-        <div>
+        <div class="traits">
             {% for trait in traits %}
                 {% if trait.category == 'Anxiety' %}
                 <p>
@@ -325,7 +331,7 @@
             {% endfor %}
         </div>
         <p>
-            <input type="submit" value="save">
+            <input type="submit" value="Save Character" class="button">
         </p>
 </form>
 {% endblock %}

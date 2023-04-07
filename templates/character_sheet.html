@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+<h3>{{ character.name }} {{ character.family }}</h3>
+
 <div class="main-container">
-    <div>
+    <div class="sub-container">
         <table>
             <tr>
                 <th colspan="3">Skills</th>
@@ -9,15 +11,15 @@
             <tr>
                 <th rowspan="4" class="skill-group">Artisan</th>
                 <td>Aesthetics</td>
-                <td>{{ character.aesthetics }}</td>
+                <td> {{ character.aesthetics }} </td>
             </tr>
             <tr>
                 <td>Composition</td>
-                <td>{{ character.composition }}</td>
+                <td> {{ character.composition }} </td>
             </tr>
             <tr>
                 <td>Design</td>
-                <td>{{ character.design }}</td>
+                <td> {{ character.design }} </td>
             </tr>
             <tr>
                 <td>Smithing</td>
@@ -108,8 +110,13 @@
                 <td>{{ character.survival }}</td>
             </tr>
         </table>
+        <div>
+            <h3>Notes</h3>
+            <div class="note-field">{{ character.notes }}</div>
+        </div>
     </div>
-    <div>
+    <div class="border"></div>
+    <div class="sub-container">
         <div>
             <table>
                 <tr>
@@ -137,6 +144,7 @@
                 </tr>
             </table>
         </div>
+        <br>
         <div>
             <table>
                 <tr>

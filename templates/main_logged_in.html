@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
     <h1>Welcome {{ username }}</h1>
-    <p><a href="/account/character/create/">Create new character</a></p>
     <table>
             <tr>
                 <th>Name</th>
@@ -17,10 +16,11 @@
             </tr>
         {% endfor %}
     </table>
+    <br>
+    <a href="/account/character/create/">Create new character</a>
     <form action="/account/" method="post">
     {% csrf_token %}
-        <input type="submit" value="logout">
+        <input type="submit" value="Logout">
     </form>
-    <br>
     <a href="/account/delete/">Delete Account</a>
 {% endblock %}
