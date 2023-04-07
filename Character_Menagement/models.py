@@ -57,6 +57,8 @@ class Weapon(models.Model):
     deadliness = models.IntegerField()
     one_hand = models.CharField(max_length=24, null=True)
     two_hand = models.CharField(max_length=24, null=True)
+    quirks = models.CharField(max_length=240, null=True)
+    type = models.CharField(max_length=30, default='sword')
 
     def __str__(self):
         return self.name
@@ -68,8 +70,8 @@ class Armor(models.Model):
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
-    physical_reduction = models.IntegerField(default=0)
-    supernatural_reduction = models.IntegerField(default=0)
+    physical_resistance = models.IntegerField(default=0)
+    supernatural_resistance = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
