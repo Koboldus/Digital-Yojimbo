@@ -28,8 +28,14 @@ class CharacterEditing(View):
         # the creator of the character
         if request.user.id != character.user_id:
             return HttpResponse("This isn't one of your characters")
+        
+        traits = Trait.objects.all()
 
-        return render(request, 'character_edit.html', {'character': character})
+        techniques = character.technique_categories.split(', ')
+
+        print(techniques)
+
+        return render(request, 'character_edit.html', {'character': character, 'techniques': techniques, 'traits': traits})
 
     def post(self, request, id):
         character = Character.objects.get(id=id)
