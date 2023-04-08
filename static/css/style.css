@@ -17,10 +17,18 @@ body {
     max-width: 400px;
 }
 
-.note-field {
-    border-radius: 1px;
-    border-color: darkolivegreen;
+.sheet-table {
+    width: 100%;
 }
+
+.plain {
+    all: initial;
+    width: 20px;
+    height: 18px;
+}
+
+/*.note-field {
+}*/
 
 .border {
     min-width: 20px;
@@ -37,6 +45,12 @@ body {
     border-color: darkolivegreen;
 }
 
+.skill-group {
+    writing-mode: vertical-rl;
+    text-orientation: sideways-right;
+    width: 20px;
+}
+
 a:hover {
     color: red;
 }
@@ -47,12 +61,6 @@ a {
 
 h1, h2, h3, th {
     color: darkolivegreen;
-}
-
-.skill-group {
-    writing-mode: vertical-rl;
-    text-orientation: sideways-right;
-    width: 20px;
 }
 
 table, th, td {

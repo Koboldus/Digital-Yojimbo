@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>{{ character.name }} {{ character.family }}</h3>
+<h3>{{ character.family }} {{ character.name }}</h3>
 
 <div class="main-container">
     <div class="sub-container">
@@ -118,7 +118,7 @@
     <div class="border"></div>
     <div class="sub-container">
         <div>
-            <table>
+            <table class="sheet-table">
                 <tr>
                     <th colspan="2">Rings</th>
                 </tr>
@@ -146,7 +146,10 @@
         </div>
         <br>
         <div>
-            <table>
+            <table class="sheet-table">
+                <tr>
+                    <th colspan="2">Social Atributes</th>
+                </tr>
                 <tr>
                     <td>Honor</td>
                     <td>{{ character.honor }}</td>
@@ -204,6 +207,88 @@
             <p>{{ element.name }} ({{ element.ring }})</p>
                 {% endif %}
             {% endfor %}
+        </div>
+    </div>
+    <div class="border"></div>
+    <div class="sub-container">
+        <div>
+            <table class="sheet-table">
+                <tr>
+                    <th colspan="3">Atributes</th>
+                </tr>
+                <tr>
+                    <th>Endurance</th>
+                    <td>{{ endurance }}</td>
+                    <td>
+                        <textarea class="plain">0</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Composure</th>
+                    <td>{{ composure }}</td>
+                    <td>
+                        <textarea class="plain">0</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Focus</th>
+                    <td colspan="2">{{ focus }}</td>
+                </tr>
+                <tr>
+                    <th>Vigilance</th>
+                    <td colspan="2">{{ vigilance }}</td>
+                </tr>
+                <tr>
+                    <th>Void Points</th>
+                    <td colspan="2">
+                        <textarea class="plain">{{ void_points }}</textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table>
+                <tr>
+                    <th colspan="6">Weapons</th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>rng</th>
+                    <th>dmg<br>dls</th>
+                    <th>Grips</th>
+                    <th>Qualities</th>
+                    <th>Other
+                        Abilities</th>
+                </tr>
+                {% for weapon in character.weapons.all %}
+                <tr>
+                    <td>{{ weapon.name }}</td>
+                    <td>{{ weapon.range }}</td>
+                    <td>{{ weapon.damage }}({{ weapon.deadliness}})</td>
+                    <td>
+                        {% if weapon.one_hand != 'X' %}1 handed ({{ weapon.one_hand }}){% endif %}<br>{% if weapon.two_hand != X %}2 handed ({{ weapon.two_hand }}){% endif %}
+                    </td>
+                    <td>
+                        {% if none in weapon.qualities.all %}
+                        -
+                        {% elif none not in weapon.qualities.all %}
+                        {% for quality in weapon.qualities.all %}
+                        {{ quality.name }}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if weapon.quirks == 'X' %}
+                        None
+                        {% elif weapon.quirks != 'X' %}
+                        {{ weapon.quirks }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>

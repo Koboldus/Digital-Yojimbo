@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from Character_Menagement.models import Character, Trait
+import math
 
 
 # The character sheet view
@@ -14,7 +15,21 @@ class CharacterSheet(View):
         if request.user.id != character.user_id:
             return HttpResponse("This isn't one of your characters")
 
-        return render(request, 'character_sheet.html', {'character': character})
+        endurance = (int(character.earth) + int(character.fire)) * 2
+        composure = (int(character.earth) + int(character.water)) * 2
+        focus = int(character.air) + int(character.fire)
+        vigilance = (int(character.air) + int(character.water)) // 2
+        void = math.ceil(int(character.void) / 2)
+
+        return render(
+            request,
+            'character_sheet.html',
+            {'character': character,
+             'endurance': endurance,
+             'composure': composure,
+             'focus': focus,
+             'vigilance':vigilance,
+             'void_points': void})
 
 
 # The character editing view
