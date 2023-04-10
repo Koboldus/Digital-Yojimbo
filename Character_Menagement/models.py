@@ -40,6 +40,7 @@ class Equipment(models.Model):
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
+    abilities = models.TextField(null=True)
 
     def __str__(self):
         return self.name
@@ -57,6 +58,8 @@ class Weapon(models.Model):
     deadliness = models.IntegerField()
     one_hand = models.CharField(max_length=24, null=True)
     two_hand = models.CharField(max_length=24, null=True)
+    quirks = models.CharField(max_length=240, null=True)
+    type = models.CharField(max_length=30, default='sword')
 
     def __str__(self):
         return self.name
@@ -68,8 +71,9 @@ class Armor(models.Model):
     price = models.IntegerField()
     qualities = models.ManyToManyField(ItemQuality)
     description = models.TextField(null=True)
-    physical_reduction = models.IntegerField(default=0)
-    supernatural_reduction = models.IntegerField(default=0)
+    physical_resistance = models.IntegerField(default=0)
+    supernatural_resistance = models.IntegerField(default=0)
+    quirks = models.CharField(max_length=240, null=True)
 
     def __str__(self):
         return self.name
@@ -183,3 +187,7 @@ class Character(models.Model):
     # Meta information
     date_of_creation = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    

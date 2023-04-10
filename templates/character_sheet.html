@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-    <div>
+<h3>{{ character.family }} {{ character.name }}</h3>
+
+<div class="main-container">
+    <div class="sub-container">
         <table>
             <tr>
-                <th>Skills</th>
+                <th colspan="3">Skills</th>
             </tr>
             <tr>
+                <th rowspan="4" class="skill-group">Artisan</th>
                 <td>Aesthetics</td>
-                <td>{{ character.aesthetics }}</td>
+                <td> {{ character.aesthetics }} </td>
             </tr>
             <tr>
                 <td>Composition</td>
-                <td>{{ character.composition }}</td>
+                <td> {{ character.composition }} </td>
             </tr>
             <tr>
                 <td>Design</td>
-                <td>{{ character.design }}</td>
+                <td> {{ character.design }} </td>
             </tr>
             <tr>
                 <td>Smithing</td>
                 <td>{{ character.smithing }}</td>
             </tr>
             <tr>
+                <th rowspan="6" class="skill-group">Martial</th>
                 <td>Fitness</td>
                 <td>{{ character.fitness }}</td>
             </tr>
@@ -47,6 +51,7 @@
                 <td>{{ character.unarmed }}</td>
             </tr>
             <tr>
+                <th rowspan="4" class="skill-group">Social</th>
                 <td>Command</td>
                 <td>{{ character.command }}</td>
             </tr>
@@ -63,6 +68,7 @@
                 <td>{{ character.performance }}</td>
             </tr>
             <tr>
+                <th rowspan="5" class="skill-group">Scholar</th>
                 <td>Culture</td>
                 <td>{{ character.culture }}</td>
             </tr>
@@ -83,6 +89,7 @@
                 <td>{{ character.medicine }}</td>
             </tr>
             <tr>
+                <th rowspan="5" class="skill-group">Trade</th>
                 <td>Commerce</td>
                 <td>{{ character.commerce }}</td>
             </tr>
@@ -103,19 +110,59 @@
                 <td>{{ character.survival }}</td>
             </tr>
         </table>
-    </div>
-    <div>
         <div>
-            <div>Earth {{ character.earth }}</div>
-            <div>Air {{ character.air }}</div>
-            <div>Water {{ character.water }}</div>
-            <div>Fire {{ character.fire }}</div>
-            <div>Void {{ character.void }}</div>
+            <h3>Notes</h3>
+            <div class="note-field">{{ character.notes }}</div>
         </div>
+    </div>
+    <div class="border"></div>
+    <div class="sub-container">
         <div>
-            <div>Honor: {{ character.honor }}</div>
-            <div>Glory: {{ character.glory }}</div>
-            <div>Status: {{ character.status }}</div>
+            <table class="sheet-table">
+                <tr>
+                    <th colspan="2">Rings</th>
+                </tr>
+                <tr>
+                    <td>Earth</td>
+                    <td>{{ character.earth }}</td>
+                </tr>
+                <tr>
+                    <td>Air</td>
+                    <td>{{ character.air }}</td>
+                </tr>
+                <tr>
+                    <td>Water</td>
+                    <td>{{ character.water }}</td>
+                </tr>
+                <tr>
+                    <td>Fire</td>
+                    <td>{{ character.fire }}</td>
+                </tr>
+                <tr>
+                    <td>Void</td>
+                    <td>{{ character.void }}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table class="sheet-table">
+                <tr>
+                    <th colspan="2">Social Atributes</th>
+                </tr>
+                <tr>
+                    <td>Honor</td>
+                    <td>{{ character.honor }}</td>
+                </tr>
+                <tr>
+                    <td>Glory</td>
+                    <td>{{ character.glory }}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{ character.status }}</td>
+                </tr>
+            </table>
         </div>
         <div>
             <h3>Ninjo</h3>
@@ -160,6 +207,88 @@
             <p>{{ element.name }} ({{ element.ring }})</p>
                 {% endif %}
             {% endfor %}
+        </div>
+    </div>
+    <div class="border"></div>
+    <div class="sub-container">
+        <div>
+            <table class="sheet-table">
+                <tr>
+                    <th colspan="3">Atributes</th>
+                </tr>
+                <tr>
+                    <th>Endurance</th>
+                    <td>{{ endurance }}</td>
+                    <td>
+                        <textarea class="plain">0</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Composure</th>
+                    <td>{{ composure }}</td>
+                    <td>
+                        <textarea class="plain">0</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Focus</th>
+                    <td colspan="2">{{ focus }}</td>
+                </tr>
+                <tr>
+                    <th>Vigilance</th>
+                    <td colspan="2">{{ vigilance }}</td>
+                </tr>
+                <tr>
+                    <th>Void Points</th>
+                    <td colspan="2">
+                        <textarea class="plain">{{ void_points }}</textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table>
+                <tr>
+                    <th colspan="6">Weapons</th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>rng</th>
+                    <th>dmg<br>dls</th>
+                    <th>Grips</th>
+                    <th>Qualities</th>
+                    <th>Other
+                        Abilities</th>
+                </tr>
+                {% for weapon in character.weapons.all %}
+                <tr>
+                    <td>{{ weapon.name }}</td>
+                    <td>{{ weapon.range }}</td>
+                    <td>{{ weapon.damage }}({{ weapon.deadliness}})</td>
+                    <td>
+                        {% if weapon.one_hand != 'X' %}1 handed ({{ weapon.one_hand }}){% endif %}<br>{% if weapon.two_hand != X %}2 handed ({{ weapon.two_hand }}){% endif %}
+                    </td>
+                    <td>
+                        {% if none in weapon.qualities.all %}
+                        -
+                        {% elif none not in weapon.qualities.all %}
+                        {% for quality in weapon.qualities.all %}
+                        {{ quality.name }}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if weapon.quirks == 'X' %}
+                        None
+                        {% elif weapon.quirks != 'X' %}
+                        {{ weapon.quirks }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>

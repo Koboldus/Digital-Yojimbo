@@ -7,7 +7,16 @@
             <label for="clan">Clan</label>
         </p>
         <p>
-            <input id="clan" type="text" name="clan" value="{{ character.clan }}">
+            <input list="clan-list" id="clan" name="clan" required="required" value="{{ character.clan}}">
+            <datalist id="clan-list">
+                <option value="Crab">Crab</option>
+                <option value="Crane">Crane</option>
+                <option value="Dragon">Dragon</option>
+                <option value="Lion">Lion</option>
+                <option value="Phoenix">Phoenix</option>
+                <option value="Scorpion">Scorpion</option>
+                <option value="Unicorn">Unicorn</option>
+            </datalist>
         </p>
         <p>
             <label for="family">Family</label>
@@ -28,6 +37,92 @@
             <input id="school" type="text" name="school" value="{{ character.school }}">
         </p>
         <p>
+            Available Techniques
+        </p>
+        <div class="main-container">
+            <div>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Kata" 
+                    name="technique_categories" 
+                    value="Kata" 
+                    {% if 'Kata' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Kata">Kata</label>
+                </p>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Kihō" 
+                    name="technique_categories" 
+                    value="Kihō" 
+                    {% if 'Kiho' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Kihō">Kihō</label>
+                </p>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Invocations" 
+                    name="technique_categories" 
+                    value="Invocations" 
+                    {% if 'Invocations' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Invocations">Invocations</label>
+                </p>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Rituals" 
+                    name="technique_categories" 
+                    value="Rituals" 
+                    {% if 'Rituals' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Rituals">Rituals</label>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Shūji" 
+                    name="technique_categories" 
+                    value="Shūji" 
+                    {% if 'Shuji' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Shūji">Shūji</label>
+                </p>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Mahō" 
+                    name="technique_categories" 
+                    value="Mahō" 
+                    {% if 'Maho' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Mahō">Mahō</label>
+                </p>
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="Ninjutsu" 
+                    name="technique_categories" 
+                    value="Ninjutsu" 
+                    {% if 'Ninjutsu' in techniques %}
+                    checked
+                    {% endif %}>
+                    <label for="Ninjutsu">Ninjutsu</label>
+                </p>
+            </div>
+        </div>
+        <p>
             <label for="ninjo">Ninjo</label>
         </p>
         <p>
@@ -43,7 +138,7 @@
             <label for="notes">Notes</label>
         </p>
         <p>
-            <input id="notes" type="text" name="notes" value="{{ character.notes }}">
+            <textarea id="notes" type="text" name="notes" rows="10" cols="50">{{ character.notes }}</textarea>
         </p>
     <h2>Rings</h2>
         <p>
@@ -241,75 +336,79 @@
             <input id="status" type="number" name="status" value="{{ character.status }}" max="100" min="0">
         </p>
     <h2>Distinctions</h2>
+    <div class="traits">
+            {% for trait in traits %}
+                {% if trait.category == 'Distinction' %}
+                <p>
+                    <input 
+                    type="checkbox" 
+                    id="{{ trait.id }}" 
+                    name="traits" 
+                    value="{{ trait.name }}"
+                    {% if trait in character.traits.all %}
+                    checked
+                    {% endif %}>
+                    <label for="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</label>
+                </p>
+                {% endif %}
+            {% endfor %}
+    </div>
+<h2>Adversities</h2>
+    <div class="traits">
+        {% for trait in traits %}
+            {% if trait.category == 'Adversity' %}
+            <p>
+                <input 
+                type="checkbox" 
+                id="{{ trait.id }}" 
+                name="traits" 
+                value="{{ trait.name }}"
+                {% if trait in character.traits.all %}
+                checked
+                {% endif %}>
+                <label for="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</label>
+            </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+<h2>Passions</h2>
+    <div class="traits">
+        {% for trait in traits %}
+            {% if trait.category == 'Passion' %}
+            <p>
+                <input 
+                type="checkbox" 
+                id="{{ trait.id }}" 
+                name="traits" 
+                value="{{ trait.name }}"
+                {% if trait in character.traits.all %}
+                checked
+                {% endif %}>
+                <label for="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</label>
+            </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+<h2>Anxieties</h2>
+    <div class="traits">
+        {% for trait in traits %}
+            {% if trait.category == 'Anxiety' %}
+            <p>
+                <input 
+                type="checkbox" 
+                id="{{ trait.id }}" 
+                name="traits" 
+                value="{{ trait.name }}"
+                {% if trait in character.traits.all %}
+                checked
+                {% endif %}>
+                <label for="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</label>
+            </p>
+            {% endif %}
+        {% endfor %}
+    </div>
         <p>
-            <input type="text" required="required" list="distinct" name="traits" id="distinctions" value="
-{% for trait in character.traits.all %}
-{% if trait.category == 'Distinction' %}
-{{ trait.name }}
-{% endif %}
-{% endfor %}
-">
-            <datalist id="distinct">
-                {% for trait in traits %}
-                    {% if trait.category == 'Distinction' %}
-                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
-                    {% endif %}
-                {% endfor %}
-            </datalist>
-        </p>
-    <h2>Adversities</h2>
-        <p>
-            <input type="text" required="required" list="advers" name="traits" id="adversities" value="
-{% for trait in character.traits.all %}
-{% if trait.category == 'Adversity' %}
-{{ trait.name }}
-{% endif %}
-{% endfor %}
-">
-            <datalist id="advers">
-                {% for trait in traits %}
-                    {% if trait.category == 'Adversity' %}
-                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
-                    {% endif %}
-                {% endfor %}
-            </datalist>
-        </p>
-    <h2>Passions</h2>
-        <p>
-            <input type="text" required="required" list="pass" name="traits" id="passions" value="
-{% for trait in character.traits.all %}
-{% if trait.category == 'Passion' %}
-{{ trait.name }}
-{% endif %}
-{% endfor %}
-">
-            <datalist id="pass">
-                {% for trait in traits %}
-                    {% if trait.category == 'Passion' %}
-                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
-                    {% endif %}
-                {% endfor %}
-            </datalist>
-        </p>
-    <h2>Anxieties</h2>
-        <p>
-            <input type="text" required="required" list="anxious" name="traits" id="anxieties" value="
-{% for trait in character.traits.all %}
-{% if trait.category == 'Anxiety' %}
-{{ trait.name }}
-{% endif %}
-{% endfor %}
-">
-            <datalist id="anxious">
-                {% for trait in traits %}
-                    {% if trait.category == 'Anxiety' %}
-                        <option value="{{ trait.name }}">{{ trait.name }} [{{ trait.ring }}]</option>
-                    {% endif %}
-                {% endfor %}
-            </datalist>
-        </p>
-        <p>
-            <input type="submit" value="save">
+            <input type="submit" value="Save changes">
         </p>
 </form>
 {% endblock %}

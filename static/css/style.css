@@ -1,0 +1,96 @@
+body {
+    background-color: rgb(231, 230, 210);
+    color: rgb(36, 34, 34);
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-radius: 1px;
+    border-color: darkolivegreen;
+    width: 100%;
+    height: 100%;
+}
+
+.sub-container {
+    max-width: 400px;
+}
+
+.sheet-table {
+    width: 100%;
+}
+
+.plain {
+    all: initial;
+    width: 20px;
+    height: 18px;
+}
+
+/*.note-field {
+}*/
+
+.border {
+    min-width: 20px;
+}
+
+.traits {
+    height: 200px;
+    width: 400px;
+    overflow: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: darkolivegreen transparent;
+    border-style: solid;
+    border-radius: 1px;
+    border-color: darkolivegreen;
+}
+
+.skill-group {
+    writing-mode: vertical-rl;
+    text-orientation: sideways-right;
+    width: 20px;
+}
+
+a:hover {
+    color: red;
+}
+
+a {
+    color: brown;
+}
+
+h1, h2, h3, th {
+    color: darkolivegreen;
+}
+
+table, th, td {
+    border: 1px solid darkolivegreen;
+    border-collapse: collapse;
+    min-width: 20px;
+}
+
+input[type=submit] {
+    all: initial;
+    background-color: transparent;
+    color: brown;
+    border: 0px;
+    padding: 0%;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    all: initial;
+    background-color: transparent;
+    color: red;
+    border: 0px;
+    padding: 0%;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+input, textarea {
+    border-radius: 1px;
+    border-color: darkolivegreen;
+    background-color: #fffeec;
+}
