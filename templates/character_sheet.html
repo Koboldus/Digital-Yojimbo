@@ -259,6 +259,34 @@
         <div>
             <table>
                 <tr>
+                    <th colspan="3">Armor</th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Protection (Resitance)</th>
+                    <th>Qualities</th>
+                </tr>
+                {% for armor in character.armor.all %}
+                <tr>
+                    <td>{{ armor.name }}</td>
+                    <td>{{ armor.physical_resistance }}({{ armor.supernatural_resistance }})</td>
+                    <td>
+                        {% if none in armor.qualities.all %}
+                        -
+                        {% elif none not in armor.qualities.all %}
+                        {% for quality in armor.qualities.all %}
+                        {{ quality.name }}
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br>
+        <div>
+            <table>
+                <tr>
                     <th colspan="6">Weapons</th>
                 </tr>
                 <tr>
