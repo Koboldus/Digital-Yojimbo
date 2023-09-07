@@ -187,6 +187,10 @@ class Character(models.Model):
     armor = models.ManyToManyField(Armor, related_name='defense')
     equipment = models.ManyToManyField(Equipment, related_name='eq')
 
+    # Money
+    # price is given in Zeni (1 koku = 5 bu = 50 zeni)
+    money = models.IntegerField(default=0)
+
     # Abilities
     technique_categories = models.CharField(max_length=64)
     techniques = models.ManyToManyField(Technique, related_name='techs')

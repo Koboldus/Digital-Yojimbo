@@ -326,6 +326,16 @@
                 {% endfor %}
             </table>
         </div>
+        <div>
+            <h3>Money</h3>
+            <p></p>
+        </div>
+        <div>
+            <h3>Other Equipment</h3>
+            {% for equipment in character.equipment.all %}
+            <p>{{ equipment.name }}</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 <div><a href="/account/">Return</a></div>
