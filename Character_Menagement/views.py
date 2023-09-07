@@ -20,6 +20,7 @@ class CharacterSheet(View):
         focus = int(character.air) + int(character.fire)
         vigilance = (int(character.air) + int(character.water)) // 2
         void = math.ceil(int(character.void) / 2)
+        
 
         return render(
             request,
