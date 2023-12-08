@@ -20,7 +20,19 @@ class CharacterSheet(View):
         focus = int(character.air) + int(character.fire)
         vigilance = (int(character.air) + int(character.water)) // 2
         void = math.ceil(int(character.void) / 2)
-        
+        money = character.money * 100 // 50
+        if len(str(money)) <= 2:
+            koku = 0
+        else:
+            koku = str(money)[:-2]
+        if len(str(money)) <= 1:
+            bu = 0
+        else:
+            bu = str(money // 2)[-2:-1]
+        if len(str(money)) <= 0:
+            zeni = 0
+        else:
+            zeni = str(money // 2)[-1:]
 
         return render(
             request,
@@ -30,7 +42,10 @@ class CharacterSheet(View):
              'composure': composure,
              'focus': focus,
              'vigilance':vigilance,
-             'void_points': void})
+             'void_points': void,
+             'koku': koku,
+             'bu': bu,
+             'zeni': zeni})
 
 
 # The character editing view
